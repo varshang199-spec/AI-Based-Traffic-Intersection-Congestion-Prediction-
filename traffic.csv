@@ -1,0 +1,22 @@
+# 🚦 Traffic Analytics Dashboard
+
+A Streamlit-based Traffic Analytics Dashboard built using Python.
+
+## Features
+
+- KPI Cards
+- Hourly Traffic Analysis
+- Junction-wise Analysis
+- Monthly Trends
+- Weekday Patterns
+- Interactive Filters
+- Plotly Visualizations
+- Insights Generation
+
+## Installation
+
+pip install -r requirements.txt
+
+## Run
+
+streamlit run app.py

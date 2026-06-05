@@ -1,7 +1,23 @@
-from utils.data_loader import load_data
-from utils.charts import vehicle_distribution_chart
+import streamlit as st
+import plotly.express as px
 
-def main():
-    df = load_data()
+from analysis import load_data
 
-    vehicle_distribution_chart(df)
+traffic, traffic2 = load_data()
+
+st.title("🚗 Vehicle Analysis")
+
+numeric_cols = traffic.select_dtypes(include='number')
+
+column = st.selectbox(
+    "Vehicle Metric",
+    numeric_cols.columns
+)
+
+fig = px.box(
+    traffic,
+    y=column,
+    title="Vehicle Distribution"
+)
+
+st.plotly_chart(fig, use_container_width=True)

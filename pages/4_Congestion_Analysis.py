@@ -1,7 +1,23 @@
-from utils.data_loader import load_data
-from utils.charts import congestion_heatmap
+import streamlit as st
+import plotly.express as px
 
-def main():
-    df = load_data()
+from analysis import load_data
 
-    congestion_heatmap(df)
+traffic, traffic2 = load_data()
+
+st.title("🚥 Congestion Analysis")
+
+numeric_cols = traffic.select_dtypes(include='number')
+
+column = st.selectbox(
+    "Select Metric",
+    numeric_cols.columns
+)
+
+fig = px.scatter(
+    traffic,
+    y=column,
+    title="Congestion Visualization"
+)
+
+st.plotly_chart(fig, use_container_width=True)

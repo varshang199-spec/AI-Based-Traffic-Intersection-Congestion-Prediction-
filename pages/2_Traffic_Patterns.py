@@ -1,21 +1,24 @@
-from sklearn.linear_model import LinearRegression
-import numpy as np
+import streamlit as st
+import pandas as pd
+import plotly.express as px
 
-numeric_cols = traffic_two_month.select_dtypes(include="number").columns
+from analysis import load_data
 
-target = st.selectbox(
-    "Select Forecast Column",
-    numeric_cols
+traffic, traffic2 = load_data()
+
+st.title("📈 Traffic Patterns")
+
+numeric_cols = traffic.select_dtypes(include='number')
+
+column = st.selectbox(
+    "Select Column",
+    numeric_cols.columns
 )
 
-data = traffic_two_month[target].dropna()
+fig = px.line(
+    traffic,
+    y=column,
+    title=f"{column} Trend"
+)
 
-X = np.arange(len(data)).reshape(-1,1)
-y = data.values
-
-model = LinearRegression()
-model.fit(X,y)
-
-future_x = np.arange(len(data)+30).reshape(-1,1)
-
-predictions = model.predict(future_x)
+st.plotly_chart(fig, use_container_width=True)

@@ -1,12 +1,4 @@
-
 import streamlit as st
-from pages import (
-    Executive_Dashboard,
-    Traffic_Patterns,
-    Vehicle_Analysis,
-    Congestion_Analysis,
-    Forecasting
-)
 
 st.set_page_config(
     page_title="Traffic Analytics Dashboard",
@@ -14,32 +6,47 @@ st.set_page_config(
     layout="wide"
 )
 
-st.sidebar.title("🚦 Navigation")
+st.title("🚦 Traffic Analytics Dashboard")
 
-page = st.sidebar.radio(
-    "Select Dashboard",
-    [
-        "Executive Dashboard",
-        "Traffic Patterns",
-        "Vehicle Analysis",
-        "Congestion Analysis",
-        "Forecasting"
-    ]
-)
+st.markdown("""
+Welcome to the Traffic Analytics Dashboard.
 
-if page == "Executive Dashboard":
-    Executive_Dashboard.main()
+### Features
+- Executive Dashboard
+- Traffic Pattern Analysis
+- Vehicle Analysis
+- Congestion Analysis
+- Traffic Forecasting
 
-elif page == "Traffic Patterns":
-    Traffic_Patterns.main()
+Use the sidebar to navigate between pages.
+""")
 
-elif page == "Vehicle Analysis":
-    Vehicle_Analysis.main()
+st.sidebar.success("Select a page above.")
 
-elif page == "Congestion Analysis":
-    Congestion_Analysis.main()
+# Dataset Information
+st.subheader("📂 Available Datasets")
 
-elif page == "Forecasting":
-    Forecasting.main()
+st.markdown("""
+- Traffic.csv
+- TrafficTwoMonth.csv
+""")
 
+col1, col2 = st.columns(2)
 
+with col1:
+    st.info("Traffic.csv\n\nContains traffic volume and vehicle information.")
+
+with col2:
+    st.info("TrafficTwoMonth.csv\n\nContains extended traffic records for trend analysis and forecasting.")
+
+st.markdown("---")
+
+st.subheader("📈 Dashboard Modules")
+
+st.markdown("""
+1. Executive Dashboard
+2. Traffic Patterns
+3. Vehicle Analysis
+4. Congestion Analysis
+5. Forecasting
+""")
